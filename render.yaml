@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: logbook-pkl
+    env: docker
+    plan: free
+    dockerfilePath: Dockerfile
+    # Optional: run migrations after deploy
+    # postDeploy:
+    #   - command: "php artisan migrate --force"
+    # Environment variables can also be set in the Render dashboard; include only examples here
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        value: ""

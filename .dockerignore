@@ -1,0 +1,10 @@
+vendor
+node_modules
+storage
+.git
+.env
+.env.*
+tests
+.github
+Dockerfile
+docker-compose.*
