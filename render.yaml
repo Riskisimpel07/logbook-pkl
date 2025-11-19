@@ -9,11 +9,14 @@ services:
       - command: "php artisan migrate --force"
       - command: "php artisan storage:link"
 
-  
     envVars:
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
         value: "false"
+      - key: APP_KEY
+        value: ""   # nanti isi dari dashboard
       - key: DB_CONNECTION
         value: sqlite
+      - key: DB_DATABASE
+        value: database/database.sqlite
