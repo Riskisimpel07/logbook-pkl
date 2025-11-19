@@ -145,7 +145,12 @@
         <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2>@yield('page-title')</h2>
-                <div><span class="badge bg-primary">{{ ucfirst(auth()->user()->role) }}</span> <strong>{{ auth()->user()->name }}</strong></div>
+                <div>
+                    <span class="badge bg-primary">
+                        {{ auth()->user()->role == 'mahasiswa' ? 'Mahasiswa/Siswa' : ucfirst(auth()->user()->role) }}
+                    </span>
+                    <strong>{{ auth()->user()->name }}</strong>
+                </div>
             </div>
             @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">{{ session('success') }}<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>

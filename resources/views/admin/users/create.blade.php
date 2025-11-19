@@ -28,7 +28,7 @@
                 <label class="form-label">Role <span class="text-danger">*</span></label>
                 <select name="role" class="form-select @error('role') is-invalid @enderror" required>
                     <option value="">Pilih Role</option>
-                    <option value="mahasiswa">Mahasiswa</option>
+                    <option value="mahasiswa">Mahasiswa/Siswa</option>
                     <option value="pembimbing">Pembimbing</option>
                 </select>
                 @error('role')<div class="invalid-feedback">{{ $message }}</div>@enderror
