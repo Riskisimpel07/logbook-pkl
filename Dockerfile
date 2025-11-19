@@ -31,11 +31,16 @@ COPY --from=builder /app /app
 # Permissions
 RUN chmod -R 775 storage bootstrap/cache
 
+# Copy entrypoint and make executable
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 # Create user (optional)
 RUN useradd -m appuser && chown -R appuser:appuser /app
 USER appuser
 
-EXPOSE 10000
+# Koyeb and other platforms provide a runtime PORT via env var. Default to 8080.
+EXPOSE 8080
 
-# Start Laravel
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=10000"]
+# Entrypoint will run migrations/storage:link (if desired) and start the server on $PORT
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
