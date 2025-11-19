@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Logbook PKL') - Pemkot Cirebon</title>
+    <!-- Favicon and OpenGraph image (uses image in public storage/berkas) -->
+    <link rel="icon" type="image/png" href="{{ asset('storage/berkas/lambang_kota_cirebon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('storage/berkas/lambang_kota_cirebon.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('storage/berkas/lambang_kota_cirebon.png') }}">
+    <!-- fallback if file uses different casing on developer machine -->
+    <link rel="icon" type="image/png" href="{{ asset('storage/berkas/Lambang_Kota_Cirebon.png') }}">
+    <meta property="og:image" content="{{ asset('storage/berkas/lambang_kota_cirebon.png') }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="{{ asset('storage/berkas/lambang_kota_cirebon.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
