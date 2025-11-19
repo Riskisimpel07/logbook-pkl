@@ -4,14 +4,16 @@ services:
     env: docker
     plan: free
     dockerfilePath: Dockerfile
-    # Optional: run migrations after deploy
-    # postDeploy:
-    #   - command: "php artisan migrate --force"
-    # Environment variables can also be set in the Render dashboard; include only examples here
+
+    postDeploy:
+      - command: "php artisan migrate --force"
+      - command: "php artisan storage:link"
+
+  
     envVars:
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
         value: "false"
-      - key: APP_KEY
-        value: ""
+      - key: DB_CONNECTION
+        value: sqlite

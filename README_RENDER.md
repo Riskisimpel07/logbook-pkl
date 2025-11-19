@@ -6,6 +6,10 @@ Panduan singkat deploy ke Render.com
 -   `.dockerignore` - mengurangi konteks build.
 -   `render.yaml` - contoh konfigurasi untuk Render (opsional).
 
+NOTE: Jika saat ini Anda mengembangkan di Laragon/MySQL lokal, Render tidak akan bisa menggunakan database tersebut. Pilihan cepat dan aman untuk deploy awal:
+
+-   Gunakan SQLite: saya sudah menambahkan `database/database.sqlite` ke repo dan mengubah contoh `.env.example` sehingga `DB_CONNECTION=sqlite` dan `DB_DATABASE=database/database.sqlite`.
+
 2. Langkah di Dashboard Render
 
 -   Buat layanan baru (New Web Service) -> Connect repo (GitHub/GitLab) -> pilih branch.
@@ -18,6 +22,25 @@ Panduan singkat deploy ke Render.com
 -   `APP_DEBUG=false`
 -   `APP_KEY` (generate di local: `php artisan key:generate --show` -> copy to Render)
 -   Database: `DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`
+
+Langkah singkat untuk menggunakan SQLite di Render (sudah disiapkan):
+
+1. Di Render dashboard → Environment, tambahkan/cek:
+    - `APP_KEY` (sudah Anda set)
+    - `APP_ENV=production`
+    - `APP_DEBUG=false`
+    - `DB_CONNECTION=sqlite`
+    - `DB_DATABASE=database/database.sqlite`
+2. Pastikan file `database/database.sqlite` termasuk di repo (sudah ditambahkan).
+3. Deploy service. `render.yaml` sudah mengaktifkan `postDeploy` yang menjalankan:
+    - `php artisan migrate --force`
+    - `php artisan storage:link`
+      Jadi seharusnya tabel akan dibuat otomatis setelah build.
+
+Catatan:
+
+-   SQLite file akan tersimpan di filesystem container Render (ephemeral). Untuk aplikasi production, gunakan managed DB (Postgres/MySQL) dan storage object (S3) untuk file yang harus persist.
+-   Jika ingin menggunakan Managed Database (Postgres) di Render, saya bisa bantu konfigurasi `DB_*` vars.
 
 4. Storage
 
